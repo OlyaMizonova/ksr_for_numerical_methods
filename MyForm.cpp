@@ -11,7 +11,7 @@
 //}
 
 #include <Windows.h>
-
+std::vector<vector<double>> v_Global;
 using namespace ksr10form;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {

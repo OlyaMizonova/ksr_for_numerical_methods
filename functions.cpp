@@ -2,7 +2,7 @@
 
 
 double g(double t, double x) {
-	return exp(-t) * sin(7 * M_PI * x)+1;
+	return exp(-t) * sin(7 * M_PI * x) + 1.;
 }
 
 vector<double> get_grid(double step, int N) {
