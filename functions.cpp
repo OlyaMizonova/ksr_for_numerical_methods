@@ -2,7 +2,10 @@
 
 
 double g(double t, double x) {
-	return exp(-t) * sin(7 * M_PI * x) + 1.;
+	double e = exp(-t);
+	double arg = 7 * M_PI * x;
+	double sn = sin(arg);
+	return e * sn + 1.;
 }
 
 vector<double> get_grid(double step, int N) {
@@ -57,7 +60,7 @@ vector<vector<double>> differenceShceme(int n, int m, double T) {
 
 	for (int j = 1; j < m + 1; j++) {
 		for (int i = 1; i <= n; i++) {//считаем коэффициент fiij
-			Phi_ij[i - 1] = -(res[j - 1][i] + g(ti[j], xi[i]) * tau);
+			Phi_ij[i - 1] = (res[j - 1][i] + g(ti[j], xi[i]) * tau);
 		}
 		new_raw = sweepMethod(n, m, cos(ti[j]), sin(4 * ti[j]), Phi_ij,T);
 		res.push_back(new_raw);

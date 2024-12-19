@@ -218,7 +218,7 @@ namespace ksr10form {
 			this->getTime->Name = L"getTime";
 			this->getTime->Size = System::Drawing::Size(100, 20);
 			this->getTime->TabIndex = 15;
-			this->getTime->Text = L"0";
+			this->getTime->Text = L"1";
 			this->getTime->TextChanged += gcnew System::EventHandler(this, &MyForm::getTime_TextChanged);
 			// 
 			// layUp
@@ -260,6 +260,7 @@ namespace ksr10form {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1044, 662);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->layDown);
@@ -309,7 +310,7 @@ namespace ksr10form {
 		}
 		tableMy->Rows->Add();
 		tableMy->Rows[0]->Cells[0]->Value = " ";
-		for (int i = 1; i < n + 1; i++) {
+		for (int i = 1; i <= n + 1; i++) {
 			tableMy->Rows->Add();
 			tableMy->Rows[0]->Cells[i]->Value = Convert::ToString(double(i-1) / n);
 		}
@@ -318,7 +319,7 @@ namespace ksr10form {
 			tableMy->Rows[i]->Cells[0]->Value = "t"+Convert::ToString(i-1)+" = " + Convert::ToString(double(i-1)*T / m);
 		}
 
-		for (int i = 1; i < m+1; i++) {
+		for (int i = 1; i <= m+1; i++) {
 			for (int j = 0; j < n+1; j++) {
 				tableMy->Rows[i]->Cells[j+1]->Value = v_Global[i-1][j];
 			}
@@ -349,7 +350,7 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 		tableMy->Rows[i]->Cells[0]->Value = "t" + Convert::ToString(i - 1) + " = " + Convert::ToString(double(i - 1) * T / m);
 	}
 
-	for (int i = 1; i < m + 1; i++) {
+	for (int i = 1; i <= m + 1; i++) {
 		for (int j = 0; j < n + 1; j++) {
 			tableMy->Rows[i]->Cells[j + 1]->Value = v_Global[i - 1][j];
 		}
@@ -370,6 +371,8 @@ private: System::Void layUp_Click(System::Object^ sender, System::EventArgs^ e) 
 	}
 }
 private: System::Void getTime_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	try { lay = Convert::ToInt32(getTime->Text); 
+
 	vector<double> toDraw = v_Global[lay];
 
 	// Создаем объект графики для PictureBox
@@ -425,6 +428,8 @@ private: System::Void getTime_TextChanged(System::Object^ sender, System::EventA
 	g->DrawString(Text2, Font, br, width-15, (int)(height / 2 - 15));
 	g->DrawString(Text3, Font, br, 40, 5);
 	g->DrawString(Text0, Font, br, 55, (int)(height / 2 + 5));
+	}
+	catch(Exception^ e){ ; }
 }
 };
 }
